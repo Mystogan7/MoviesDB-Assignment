@@ -12,6 +12,16 @@
 		181E42B3221C68000095E401 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 181E42B1221C68000095E401 /* Main.storyboard */; };
 		181E42B5221C68020095E401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 181E42B4221C68020095E401 /* Assets.xcassets */; };
 		181E42B8221C68020095E401 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 181E42B6221C68020095E401 /* LaunchScreen.storyboard */; };
+		181E42C0221C6B1B0095E401 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E42BF221C6B1B0095E401 /* BaseService.swift */; };
+		181E42C3221C6E180095E401 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E42C2221C6E180095E401 /* Result.swift */; };
+		181E42C5221C6F490095E401 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E42C4221C6F490095E401 /* RequestProtocol.swift */; };
+		181E42C7221C709B0095E401 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E42C6221C709B0095E401 /* BaseModel.swift */; };
+		181E42CA221C71550095E401 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E42C9221C71550095E401 /* Urls.swift */; };
+		181E42CD221C74600095E401 /* BaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E42CC221C74600095E401 /* BaseError.swift */; };
+		181E42D1221C7D840095E401 /* Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E42D0221C7D840095E401 /* Aliases.swift */; };
+		181E42D3221C7ED10095E401 /* FetchMoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E42D2221C7ED10095E401 /* FetchMoviesService.swift */; };
+		181E42D5221C80760095E401 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E42D4221C80760095E401 /* NetworkManager.swift */; };
+		181E42D7221C8D290095E401 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E42D6221C8D290095E401 /* BaseRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +32,16 @@
 		181E42B4221C68020095E401 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		181E42B7221C68020095E401 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		181E42B9221C68020095E401 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		181E42BF221C6B1B0095E401 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		181E42C2221C6E180095E401 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		181E42C4221C6F490095E401 /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
+		181E42C6221C709B0095E401 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		181E42C9221C71550095E401 /* Urls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
+		181E42CC221C74600095E401 /* BaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseError.swift; sourceTree = "<group>"; };
+		181E42D0221C7D840095E401 /* Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
+		181E42D2221C7ED10095E401 /* FetchMoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMoviesService.swift; sourceTree = "<group>"; };
+		181E42D4221C80760095E401 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		181E42D6221C8D290095E401 /* BaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,11 +77,45 @@
 				181E42AD221C68000095E401 /* AppDelegate.swift */,
 				181E42AF221C68000095E401 /* ViewController.swift */,
 				181E42B1221C68000095E401 /* Main.storyboard */,
+				181E42D2221C7ED10095E401 /* FetchMoviesService.swift */,
+				181E42CB221C72120095E401 /* Constant */,
+				181E42C1221C6B240095E401 /* Networking */,
 				181E42B4221C68020095E401 /* Assets.xcassets */,
 				181E42B6221C68020095E401 /* LaunchScreen.storyboard */,
 				181E42B9221C68020095E401 /* Info.plist */,
 			);
 			path = MoviesDB;
+			sourceTree = "<group>";
+		};
+		181E42C1221C6B240095E401 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				181E42C8221C71370095E401 /* Base */,
+				181E42C4221C6F490095E401 /* RequestProtocol.swift */,
+				181E42D4221C80760095E401 /* NetworkManager.swift */,
+				181E42C2221C6E180095E401 /* Result.swift */,
+				181E42D0221C7D840095E401 /* Aliases.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		181E42C8221C71370095E401 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				181E42C6221C709B0095E401 /* BaseModel.swift */,
+				181E42CC221C74600095E401 /* BaseError.swift */,
+				181E42BF221C6B1B0095E401 /* BaseService.swift */,
+				181E42D6221C8D290095E401 /* BaseRequest.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		181E42CB221C72120095E401 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				181E42C9221C71550095E401 /* Urls.swift */,
+			);
+			path = Constant;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,8 +188,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181E42D1221C7D840095E401 /* Aliases.swift in Sources */,
+				181E42C7221C709B0095E401 /* BaseModel.swift in Sources */,
+				181E42D3221C7ED10095E401 /* FetchMoviesService.swift in Sources */,
+				181E42C0221C6B1B0095E401 /* BaseService.swift in Sources */,
 				181E42B0221C68000095E401 /* ViewController.swift in Sources */,
+				181E42C3221C6E180095E401 /* Result.swift in Sources */,
+				181E42CA221C71550095E401 /* Urls.swift in Sources */,
 				181E42AE221C68000095E401 /* AppDelegate.swift in Sources */,
+				181E42D7221C8D290095E401 /* BaseRequest.swift in Sources */,
+				181E42C5221C6F490095E401 /* RequestProtocol.swift in Sources */,
+				181E42D5221C80760095E401 /* NetworkManager.swift in Sources */,
+				181E42CD221C74600095E401 /* BaseError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
