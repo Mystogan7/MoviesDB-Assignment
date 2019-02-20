@@ -13,12 +13,12 @@ class BaseRequest<ResponseModel: BaseModel, ErrorModel: BaseError>: RequestProto
     typealias Error = ErrorModel
     
     var path: Urls.Path
-    var httpMethod: Urls.HttpMethod
+    var httpMethod: HttpMethod
     var responseModel: BaseModel.Type
     var completion: (Result<Model, Error>) -> Void
 
     init(path: Urls.Path,
-         httpMethod: Urls.HttpMethod = .get,
+         httpMethod: HttpMethod = .get,
          requiredResponseModel: BaseModel.Type,
          resultHandler: @escaping (Result<Model, Error>) -> Void) {
         self.path = path

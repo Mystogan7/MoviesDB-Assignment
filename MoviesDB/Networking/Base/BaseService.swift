@@ -9,7 +9,6 @@ import Foundation
 
 class BaseService<ServiceModel:BaseModel, ServiceError> {
     
-    
     final func start(parameters: Parameters, completion: @escaping (Result<ServiceModel, ServiceError>)->Void) {
        startBusinessLogic(parameters: parameters, completion: completion)
     }
@@ -21,9 +20,6 @@ class BaseService<ServiceModel:BaseModel, ServiceError> {
     func startBusinessLogic(parameters: Parameters, completion: @escaping (Result<ServiceModel, ServiceError>)->Void) {
         //Should be implemented and overriden.
     }
-    
-    
-    
     
 }
 

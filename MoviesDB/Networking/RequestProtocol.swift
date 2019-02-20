@@ -13,7 +13,7 @@ protocol RequestProtocol {
     associatedtype Error: BaseError
 
     var path: Urls.Path { get }
-    var httpMethod: Urls.HttpMethod { get }
+    var httpMethod: HttpMethod { get }
     var responseModel: BaseModel.Type { get }
     var completion: (Result<Model, Error>) -> Void { get }
 
