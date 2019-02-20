@@ -6,24 +6,25 @@
 //
 
 
-//import Foundation
-//
-//class FetchMoviesService: BaseService<BaseModel(), BaseError()> {
-//    
-//    override func startBusinessLogic(params: VFVoid, completion: @escaping (VFResult<VFChatConfigArrResponseModel, DXLAppError>) -> Void) {
-//        let selectedService = VFLoggedUserSitesDetailsModel.shared.currentService?.id ?? ""
-//        let request = VFBaseDxlRequest<VFChatConfigArrResponseModel, VFDxlError>(path: .chatConfiguration(selectedService: selectedService), httpMethod: .get) { (result) in
-//            let serviceResult: VFResult<VFChatConfigArrResponseModel, DXLAppError>
-//            switch result{
-//            case .success(let model):
-//                serviceResult = .success(model)
-//            case .failure(let err):
-//                serviceResult = .failure(err.appErr)
-//            }
-//            completion(serviceResult)
-//        }
-//        startRequest(request)
-//    }
-//    
-//}
+import Foundation
+
+class FetchMoviesService: BaseService<Movies, BaseError> {
+    
+    override func startBusinessLogic(parameters: Parameters, completion: @escaping (Result<Movies, BaseError>) -> Void) {
+        let page = parameters["page"]
+        let requiredModel = Movies.self
+        let request = BaseRequest(path: Urls.Path.movies(page: page ?? ""), httpMethod: .get, requiredResponseModel: requiredModel) { (result) in
+            let serviceResult: Result<Movies, BaseError>
+            switch result {
+            case .success(let model):
+                serviceResult = .success(model)
+            case .failure(let error):
+                serviceResult = .failure(error)
+            }
+            completion(serviceResult)
+        }
+        startRequest(request: request)
+    }
+    
+}
 

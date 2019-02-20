@@ -17,16 +17,16 @@ class NetworkManager {
     static var shared: NetworkManager = NetworkManager()
     
     let defaultSession = URLSession(configuration: .default)
-    var dataTask: URLSessionDataTask?
+    var task: URLSessionTask?
     
     func start<Request: RequestProtocol>(_ request: Request) {
-        dataTask?.cancel()
+        task?.cancel()
         guard let requestURL = URL(string: request.path.absolutePath) else {
-            dataTask?.cancel()
+            task?.cancel()
             return
         }
-        dataTask = defaultSession.dataTask(with: requestURL) { data, response, error in
-                defer { self.dataTask = nil }
+        task = defaultSession.dataTask(with: requestURL) { data, response, error in
+                defer { self.task = nil }
             if let response = response as? HTTPURLResponse {
                 let result = self.handleResponse(response)
                 var requestResult: Result<Request.Model, Request.Error>
@@ -38,7 +38,7 @@ class NetworkManager {
                     do {
                         let json = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
                         print(json)
-                        let model = try JSONDecoder().decode(type(of: request.responseModel).self, from: responseData)
+                        let model = try JSONDecoder().decode(request.responseModel.self, from: responseData)
                         requestResult = Result.success(model)
                         request.completion(requestResult)
                     } catch { }
@@ -49,7 +49,7 @@ class NetworkManager {
                 }
             }
         }
-        dataTask?.resume()
+        task?.resume()
     }
 
     private func handleResponse(_ response: HTTPURLResponse) -> ResultStatus {

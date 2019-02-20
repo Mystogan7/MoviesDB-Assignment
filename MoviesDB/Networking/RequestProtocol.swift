@@ -14,8 +14,7 @@ protocol RequestProtocol {
 
     var path: Urls.Path { get }
     var httpMethod: Urls.HttpMethod { get }
-    var bodyParameters: [String: Any]? { get }
-    var responseModel: BaseModel { get }
+    var responseModel: BaseModel.Type { get }
     var completion: (Result<Model, Error>) -> Void { get }
 
 }
