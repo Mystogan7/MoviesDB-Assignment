@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum StatusCode: Int {
-    case success = 200
-    case failure = 300
+enum ResultStatus {
+    case success
+    case failure
 }
 
 class NetworkManager {
@@ -18,7 +18,6 @@ class NetworkManager {
     
     let defaultSession = URLSession(configuration: .default)
     var dataTask: URLSessionDataTask?
-    var errorMessage = ""
     
     func start<Request: RequestProtocol>(_ request: Request) {
         dataTask?.cancel()
@@ -28,37 +27,40 @@ class NetworkManager {
         }
         dataTask = defaultSession.dataTask(with: requestURL) { data, response, error in
                 defer { self.dataTask = nil }
-            let response = response as? HTTPURLResponse
-            switch response?
-                .statusCode {
-            case StatusCode.success.rawValue: break
-                // get a dictionary from data and append it to request completion.
-                //            let result: Result<Request.Model, Request.Error> = Result.success(<#ResponseModel#>)
-                //            request.completion(result!)
-            case StatusCode.failure.rawValue: break
-                //            let result: Result<Request.Model, Request.Error> = Result.success(<#ResponseModel#>)
-                //            request.completion(result!)
-            default:
-                break
-
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleResponse(response)
+                var requestResult: Result<Request.Model, Request.Error>
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        return
+                    }
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
+                        print(json)
+                        let model = try JSONDecoder().decode(type(of: request.responseModel).self, from: responseData)
+                        requestResult = Result.success(model)
+                        request.completion(requestResult)
+                    } catch { }
+                    
+                case .failure:
+                    requestResult = Result.failure(BaseError(error: "", errorCode: "", description: ""))
+                    request.completion(requestResult)
+                }
             }
         }
         dataTask?.resume()
     }
-    
-    private func parseResponse(from data: Data) -> JSON? {
-        var response: JSON?
-        
-        do {
-            response = try JSONSerialization.jsonObject(with: data, options: []) as? JSON
-        } catch let parseError as NSError {
-            errorMessage += "JSONSerialization error: \(parseError.localizedDescription)\n"
-            return nil
+
+    private func handleResponse(_ response: HTTPURLResponse) -> ResultStatus {
+        switch response.statusCode {
+        case 200:
+            return .success
+        case 401:
+            return .failure
+        default:
+            return .failure
         }
-        return response
     }
-    
-    
-    
     
 }

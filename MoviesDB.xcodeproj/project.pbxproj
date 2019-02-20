@@ -22,6 +22,7 @@
 		181E42D3221C7ED10095E401 /* FetchMoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E42D2221C7ED10095E401 /* FetchMoviesService.swift */; };
 		181E42D5221C80760095E401 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E42D4221C80760095E401 /* NetworkManager.swift */; };
 		181E42D7221C8D290095E401 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E42D6221C8D290095E401 /* BaseRequest.swift */; };
+		181E42D9221DBBFA0095E401 /* ResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E42D8221DBBFA0095E401 /* ResponseModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		181E42D2221C7ED10095E401 /* FetchMoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMoviesService.swift; sourceTree = "<group>"; };
 		181E42D4221C80760095E401 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		181E42D6221C8D290095E401 /* BaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
+		181E42D8221DBBFA0095E401 /* ResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				181E42AF221C68000095E401 /* ViewController.swift */,
 				181E42B1221C68000095E401 /* Main.storyboard */,
 				181E42D2221C7ED10095E401 /* FetchMoviesService.swift */,
+				181E42D8221DBBFA0095E401 /* ResponseModels.swift */,
 				181E42CB221C72120095E401 /* Constant */,
 				181E42C1221C6B240095E401 /* Networking */,
 				181E42B4221C68020095E401 /* Assets.xcassets */,
@@ -196,6 +199,7 @@
 				181E42C3221C6E180095E401 /* Result.swift in Sources */,
 				181E42CA221C71550095E401 /* Urls.swift in Sources */,
 				181E42AE221C68000095E401 /* AppDelegate.swift in Sources */,
+				181E42D9221DBBFA0095E401 /* ResponseModels.swift in Sources */,
 				181E42D7221C8D290095E401 /* BaseRequest.swift in Sources */,
 				181E42C5221C6F490095E401 /* RequestProtocol.swift in Sources */,
 				181E42D5221C80760095E401 /* NetworkManager.swift in Sources */,

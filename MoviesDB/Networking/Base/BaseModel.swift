@@ -7,15 +7,10 @@
 
 import Foundation
 
-class BaseModel: NSObject {
+class BaseModel: Decodable {
     
-    //MARK: Initalization
-    
-    override init() {
-    }
-    
-    required init?(json: JSON) {
-        debugPrint("Initializing empty response object")
-    }
+    init() {}
+
+    required init(from decoder: Decoder) throws { }
     
 }

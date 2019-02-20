@@ -9,8 +9,13 @@ import Foundation
 
 class BaseError {
     
-    var error: String?
-    var errorCode: String?
-    var description: String?
+    var error: String
+    var errorCode: String
+    var description: String
    
+    init(error:String, errorCode: String, description: String) {
+        self.error = error
+        self.description = description
+        self.errorCode = errorCode
+    }
 }

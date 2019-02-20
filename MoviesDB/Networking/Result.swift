@@ -8,6 +8,6 @@
 import Foundation
 
 enum Result<ResponseModel, ErrorModel> {
-    case success(ResponseModel)
-    case failure(ErrorModel)
+    case success(BaseModel)
+    case failure(BaseError)
 }
