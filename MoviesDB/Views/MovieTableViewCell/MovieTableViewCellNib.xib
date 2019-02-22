@@ -11,66 +11,65 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCellReuseIdentifier" rowHeight="371" id="Vuv-sC-01C" customClass="MovieTableViewCell" customModule="MoviesDB" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="371"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="MovieTableViewCell" rowHeight="600" id="Vuv-sC-01C" customClass="MovieTableViewCell" customModule="MoviesDB" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vuv-sC-01C" id="24c-3U-eyd">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="370.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="599.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MVR-6o-WPR" userLabel="containerView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="370.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="599.5"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14M-ib-1aP" userLabel="contentView">
-                                <rect key="frame" x="10" y="10" width="355" height="350.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14M-ib-1aP" userLabel="mainView">
+                                <rect key="frame" x="10" y="10" width="355" height="579.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0EV-Ee-yTj" userLabel="posterContainer">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="350.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="579.5"/>
                                         <subviews>
-                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ck6-BP-njH" userLabel="posterImageView">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="350.5"/>
+                                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="1000" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ck6-BP-njH" userLabel="posterImageView">
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="579.5"/>
                                             </imageView>
-                                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I2l-Nm-odk" userLabel="backgroundImage">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="350.5"/>
+                                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I2l-Nm-odk" userLabel="backgroundImage">
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="579.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1w-ad-loe">
-                                                <rect key="frame" x="8" y="175.5" width="339" height="175"/>
+                                                <rect key="frame" x="8" y="290" width="339" height="289.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avengers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JhC-eT-3Nc">
-                                                        <rect key="frame" x="8" y="8" width="323" height="17"/>
+                                                        <rect key="frame" x="8" y="8" width="323" height="20"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="17" id="NgD-rL-8n6"/>
+                                                            <constraint firstAttribute="height" constant="20" id="NgD-rL-8n6"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="16"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKQ-gw-YwR">
-                                                        <rect key="frame" x="8" y="38" width="323" height="137"/>
+                                                        <rect key="frame" x="8" y="57" width="323" height="138"/>
                                                         <string key="text">Seasoned musician Jackson Maine discovers \U2014 and falls in love with \U2014 struggling artist Ally. She has just about given up on her dream to make it big as a singer \U2014 until Jack coaxes her into the spotlight. But even as Ally's career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.</string>
                                                         <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018-12-07" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lj7-BF-4fi">
-                                                        <rect key="frame" x="8" y="25" width="323" height="13"/>
+                                                        <rect key="frame" x="8" y="32" width="323" height="17"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="13" id="uyD-iB-TFc"/>
+                                                            <constraint firstAttribute="height" constant="17" id="uyD-iB-TFc"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="13"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="JhC-eT-3Nc" secondAttribute="trailing" constant="8" id="Dqc-dU-D7q"/>
-                                                    <constraint firstAttribute="bottom" secondItem="GKQ-gw-YwR" secondAttribute="bottom" id="G8f-Qr-V8X"/>
-                                                    <constraint firstItem="GKQ-gw-YwR" firstAttribute="top" secondItem="lj7-BF-4fi" secondAttribute="bottom" id="Jm2-fa-P4K"/>
                                                     <constraint firstItem="JhC-eT-3Nc" firstAttribute="leading" secondItem="c1w-ad-loe" secondAttribute="leading" constant="8" id="U3z-2c-ump"/>
+                                                    <constraint firstItem="GKQ-gw-YwR" firstAttribute="top" secondItem="lj7-BF-4fi" secondAttribute="bottom" constant="8" id="Ztu-OS-wfS"/>
                                                     <constraint firstItem="lj7-BF-4fi" firstAttribute="leading" secondItem="JhC-eT-3Nc" secondAttribute="leading" id="aDg-NB-H5s"/>
                                                     <constraint firstItem="lj7-BF-4fi" firstAttribute="trailing" secondItem="JhC-eT-3Nc" secondAttribute="trailing" id="dKV-rz-YLC"/>
-                                                    <constraint firstItem="lj7-BF-4fi" firstAttribute="top" secondItem="JhC-eT-3Nc" secondAttribute="bottom" id="evN-Al-RXg"/>
+                                                    <constraint firstItem="lj7-BF-4fi" firstAttribute="top" secondItem="JhC-eT-3Nc" secondAttribute="bottom" constant="4" id="evN-Al-RXg"/>
                                                     <constraint firstItem="GKQ-gw-YwR" firstAttribute="leading" secondItem="JhC-eT-3Nc" secondAttribute="leading" id="gay-bO-aBD"/>
                                                     <constraint firstItem="JhC-eT-3Nc" firstAttribute="top" secondItem="c1w-ad-loe" secondAttribute="top" constant="8" id="k7V-WN-aJc"/>
                                                     <constraint firstItem="GKQ-gw-YwR" firstAttribute="trailing" secondItem="JhC-eT-3Nc" secondAttribute="trailing" id="yW9-lI-cde"/>
@@ -121,8 +120,8 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="contentTextView" destination="c1w-ad-loe" id="VnZ-03-WZ6"/>
-                <outlet property="contentView" destination="14M-ib-1aP" id="xLl-yq-XlK"/>
                 <outlet property="dateLabel" destination="lj7-BF-4fi" id="xRu-h4-wdg"/>
+                <outlet property="mainView" destination="14M-ib-1aP" id="f94-wz-n7I"/>
                 <outlet property="overViewLabel" destination="GKQ-gw-YwR" id="QVw-f7-n5L"/>
                 <outlet property="posterImageView" destination="Ck6-BP-njH" id="3Mj-sx-EkY"/>
                 <outlet property="titleLabel" destination="JhC-eT-3Nc" id="UDB-2A-7QL"/>

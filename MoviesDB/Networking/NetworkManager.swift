@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum ResultStatus {
     case success
@@ -16,8 +17,9 @@ class NetworkManager {
     
     static var shared: NetworkManager = NetworkManager()
     
-    let defaultSession = URLSession(configuration: .default)
-    var task: URLSessionTask?
+    private let defaultSession = URLSession(configuration: .default)
+    private var task: URLSessionTask?
+    private let caching: Caching = Caching()
     
     func start<Request: RequestProtocol>(_ request: Request) {
         task?.cancel()
@@ -50,6 +52,34 @@ class NetworkManager {
             }
         }
         task?.resume()
+    }
+    
+    //This function is made specifically to load images and caching them.
+    func loadImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
+        task?.cancel()
+        caching.load(key: url.absoluteString, completion: { [weak self] cachedData in
+            if let data = cachedData, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    completion(image)
+                }
+            } else {
+                self!.task = self!.defaultSession.dataTask(with: url, completionHandler: { (data, _, error) in
+                    guard let data = data, error == nil else {
+                        return
+                    }
+                    if let image = UIImage(data: data) {
+                        //Save to cache
+                        self?.caching.save(data: data, key: url.absoluteString)
+                        DispatchQueue.main.async {
+                            completion(image)
+                        }
+                    } else {
+                        print("Error loading image at \(url)")
+                    }
+                })
+                self?.task?.resume()
+            }
+        })
     }
 
     private func handleResponse(_ response: HTTPURLResponse) -> ResultStatus {
