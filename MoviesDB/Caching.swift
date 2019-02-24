@@ -13,20 +13,22 @@ final class Caching {
     
     private let diskPath: URL
     
+    var pathComponent:String = "Movies"
+    
     private let fileManager: FileManager
     
-    private let serialQueue = DispatchQueue(label: "Recipes")
+    private let queue = DispatchQueue(label: "Movies")
     
     init(fileManager: FileManager = FileManager.default) {
         self.fileManager = fileManager
         do {
-            let documentDirectory = try fileManager.url(
+            let documentDirectory = try fileManager.url (
                 for: .documentDirectory,
                 in: .userDomainMask,
                 appropriateFor: nil,
                 create: true
             )
-            diskPath = documentDirectory.appendingPathComponent("Recipes")
+            diskPath = documentDirectory.appendingPathComponent(pathComponent)
             try createDirectoryIfNeeded()
         } catch {
             fatalError()
@@ -36,7 +38,7 @@ final class Caching {
     func save(data: Data, key: String, completion: (() -> Void)? = nil) {
         let key = key.MD5
         
-        serialQueue.async {
+        queue.async {
             self.memory.setObject(data as NSData, forKey: key! as NSString)
             do {
                 try data.write(to: self.filePath(key: key!))
@@ -50,7 +52,7 @@ final class Caching {
     func load(key: String, completion: @escaping (Data?) -> Void) {
         let key = key.MD5
         
-        serialQueue.async {
+        queue.async {
             if let data = self.memory.object(forKey: key! as NSString) {
                 completion(data as Data)
                 return
@@ -66,7 +68,6 @@ final class Caching {
         }
     }
     
-  
     private func filePath(key: String) -> URL {
         return diskPath.appendingPathComponent(key)
     }

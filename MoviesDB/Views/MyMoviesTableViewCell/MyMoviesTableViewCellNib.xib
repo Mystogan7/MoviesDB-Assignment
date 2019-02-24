@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyMoviesTableViewCell" rowHeight="175" id="1Yq-nD-A9M" customClass="MyMoviesTableViewCell" customModule="MoviesDB" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Yq-nD-A9M" id="MbO-Gn-PMk">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="174.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QDI-Mw-7PB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="174.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l8C-4w-oPR">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="174.5"/>
+                                <subviews>
+                                    <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="lJa-rX-d1j">
+                                        <rect key="frame" x="0.0" y="4" width="375" height="166.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1nD-Fj-DCt">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="lJa-rX-d1j" firstAttribute="top" secondItem="l8C-4w-oPR" secondAttribute="top" constant="4" id="8x7-ya-GQN"/>
+                                    <constraint firstAttribute="bottom" secondItem="lJa-rX-d1j" secondAttribute="bottom" constant="4" id="HpY-Cq-CMn"/>
+                                    <constraint firstItem="lJa-rX-d1j" firstAttribute="leading" secondItem="l8C-4w-oPR" secondAttribute="leading" id="jwz-la-S0K"/>
+                                    <constraint firstAttribute="trailing" secondItem="lJa-rX-d1j" secondAttribute="trailing" id="rUH-Iz-jmt"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="l8C-4w-oPR" secondAttribute="trailing" id="3iN-wr-hNd"/>
+                            <constraint firstItem="l8C-4w-oPR" firstAttribute="top" secondItem="QDI-Mw-7PB" secondAttribute="top" id="LLr-N0-mS5"/>
+                            <constraint firstItem="l8C-4w-oPR" firstAttribute="leading" secondItem="QDI-Mw-7PB" secondAttribute="leading" id="aAf-pf-1oQ"/>
+                            <constraint firstAttribute="bottom" secondItem="l8C-4w-oPR" secondAttribute="bottom" id="yie-0T-B0Q"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="QDI-Mw-7PB" secondAttribute="trailing" id="3YY-hZ-b0A"/>
+                    <constraint firstItem="QDI-Mw-7PB" firstAttribute="leading" secondItem="MbO-Gn-PMk" secondAttribute="leading" id="Cr0-6z-ysP"/>
+                    <constraint firstAttribute="bottom" secondItem="QDI-Mw-7PB" secondAttribute="bottom" id="RYb-IQ-MZt"/>
+                    <constraint firstItem="QDI-Mw-7PB" firstAttribute="top" secondItem="MbO-Gn-PMk" secondAttribute="top" id="utH-Ij-SGq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="collectionView" destination="lJa-rX-d1j" id="MSD-m3-khS"/>
+                <outlet property="mainView" destination="l8C-4w-oPR" id="HVP-RB-cso"/>
+            </connections>
+            <point key="canvasLocation" x="109.59999999999999" y="113.79310344827587"/>
+        </tableViewCell>
+    </objects>
+</document>

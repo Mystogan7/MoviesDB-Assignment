@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyMoviesCollectionViewCell" id="cPq-Gi-He9" customClass="MyMoviesCollectionViewCell" customModule="MoviesDB" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="135" height="160"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="135" height="160"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zTT-TN-1hM">
+                        <rect key="frame" x="5" y="5" width="125" height="150"/>
+                        <subviews>
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="1000" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BJA-0x-o1U" userLabel="posterImageView">
+                                <rect key="frame" x="0.0" y="0.0" width="125" height="150"/>
+                            </imageView>
+                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JhP-qW-92w" userLabel="backgroundImage">
+                                <rect key="frame" x="0.0" y="0.0" width="125" height="150"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avengers" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l77-UK-Gcm">
+                                <rect key="frame" x="8" y="8" width="109" height="19.5"/>
+                                <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="BJA-0x-o1U" firstAttribute="leading" secondItem="zTT-TN-1hM" secondAttribute="leading" id="0No-xd-1Mi"/>
+                            <constraint firstAttribute="trailing" secondItem="BJA-0x-o1U" secondAttribute="trailing" id="7Yh-st-2Z7"/>
+                            <constraint firstItem="l77-UK-Gcm" firstAttribute="top" secondItem="zTT-TN-1hM" secondAttribute="top" constant="8" id="E7U-Yk-NaN"/>
+                            <constraint firstItem="JhP-qW-92w" firstAttribute="top" secondItem="BJA-0x-o1U" secondAttribute="top" id="Iof-Xl-5la"/>
+                            <constraint firstItem="JhP-qW-92w" firstAttribute="bottom" secondItem="BJA-0x-o1U" secondAttribute="bottom" id="K6n-4z-lGX"/>
+                            <constraint firstItem="l77-UK-Gcm" firstAttribute="leading" secondItem="zTT-TN-1hM" secondAttribute="leading" constant="8" id="UJI-Em-wue"/>
+                            <constraint firstAttribute="bottom" secondItem="BJA-0x-o1U" secondAttribute="bottom" id="Zcn-X7-wGs"/>
+                            <constraint firstItem="BJA-0x-o1U" firstAttribute="top" secondItem="zTT-TN-1hM" secondAttribute="top" id="a3f-5Z-Lv1"/>
+                            <constraint firstItem="JhP-qW-92w" firstAttribute="leading" secondItem="BJA-0x-o1U" secondAttribute="leading" id="haa-td-Wd8"/>
+                            <constraint firstAttribute="trailing" secondItem="l77-UK-Gcm" secondAttribute="trailing" constant="8" id="nVS-ia-lb4"/>
+                            <constraint firstItem="JhP-qW-92w" firstAttribute="trailing" secondItem="BJA-0x-o1U" secondAttribute="trailing" id="qns-yO-VkT"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="zTT-TN-1hM" firstAttribute="top" secondItem="cPq-Gi-He9" secondAttribute="top" constant="5" id="NNt-Xp-aRr"/>
+                <constraint firstAttribute="trailing" secondItem="zTT-TN-1hM" secondAttribute="trailing" constant="5" id="ZXP-Ac-bcA"/>
+                <constraint firstAttribute="bottom" secondItem="zTT-TN-1hM" secondAttribute="bottom" constant="5" id="c9a-HI-EyT"/>
+                <constraint firstItem="zTT-TN-1hM" firstAttribute="leading" secondItem="cPq-Gi-He9" secondAttribute="leading" constant="5" id="vDJ-53-I3Y"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vIs-X7-YWa"/>
+            <size key="customSize" width="135" height="160"/>
+            <connections>
+                <outlet property="mainView" destination="zTT-TN-1hM" id="ati-sE-h1e"/>
+                <outlet property="movieTitleLabel" destination="l77-UK-Gcm" id="k7h-NG-Udg"/>
+                <outlet property="posterImageView" destination="BJA-0x-o1U" id="Y78-CW-B0x"/>
+            </connections>
+            <point key="canvasLocation" x="133.59999999999999" y="125.03748125937032"/>
+        </collectionViewCell>
+    </objects>
+</document>

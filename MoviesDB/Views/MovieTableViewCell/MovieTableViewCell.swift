@@ -27,12 +27,13 @@ class MovieTableViewCell: UITableViewCell {
     
     //MARK: Variables&Constants
     static let estimatedHeight: CGFloat = 600
+    static let nibName: String = "MovieTableViewCellNib"
     
-    func configureCell(poster: String, title: String, overViewText: String, date: String) {
+    func configureCell(imagePath: String, title: String, overViewText: String, date: String) {
         titleLabel.text = title
         overViewLabel.text = overViewText
         dateLabel.text = date
-        posterImageView.fetchImage(URL(string: "\(Urls.Path.poster.absolutePath)\(poster)")!)
+        posterImageView.fetchImage(URL(string: "\(Urls.Path.poster.absolutePath)\(imagePath)")!)
     }
    
 

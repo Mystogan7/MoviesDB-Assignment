@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BaseModel: Decodable {
+class BaseModel: Codable {
     
     init() {}
 
