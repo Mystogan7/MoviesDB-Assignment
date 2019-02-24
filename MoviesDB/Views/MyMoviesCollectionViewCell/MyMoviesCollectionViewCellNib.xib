@@ -22,12 +22,27 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zTT-TN-1hM">
                         <rect key="frame" x="5" y="5" width="125" height="150"/>
                         <subviews>
-                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="1000" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BJA-0x-o1U" userLabel="posterImageView">
-                                <rect key="frame" x="0.0" y="0.0" width="125" height="150"/>
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="1000" misplaced="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BJA-0x-o1U" userLabel="posterImageView">
+                                <rect key="frame" x="0.0" y="0.0" width="125" height="160"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avengers" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l77-UK-Gcm">
-                                <rect key="frame" x="8" y="8" width="109" height="19.5"/>
-                                <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avengers" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="l77-UK-Gcm">
+                                <rect key="frame" x="8" y="8" width="109" height="14"/>
+                                <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01/01/2019" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aQA-eg-3mZ">
+                                <rect key="frame" x="8" y="22" width="109" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="XPV-4s-Ye8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="overview" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPi-X4-sdT">
+                                <rect key="frame" x="8" y="36" width="109" height="13"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -35,11 +50,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="BJA-0x-o1U" firstAttribute="leading" secondItem="zTT-TN-1hM" secondAttribute="leading" id="0No-xd-1Mi"/>
+                            <constraint firstItem="QPi-X4-sdT" firstAttribute="top" secondItem="aQA-eg-3mZ" secondAttribute="bottom" constant="2" id="5k5-EQ-klU"/>
                             <constraint firstAttribute="trailing" secondItem="BJA-0x-o1U" secondAttribute="trailing" id="7Yh-st-2Z7"/>
+                            <constraint firstItem="QPi-X4-sdT" firstAttribute="trailing" secondItem="aQA-eg-3mZ" secondAttribute="trailing" id="AZy-jq-bQT"/>
                             <constraint firstItem="l77-UK-Gcm" firstAttribute="top" secondItem="zTT-TN-1hM" secondAttribute="top" constant="8" id="E7U-Yk-NaN"/>
+                            <constraint firstItem="QPi-X4-sdT" firstAttribute="leading" secondItem="aQA-eg-3mZ" secondAttribute="leading" id="G1Y-fi-zKk"/>
+                            <constraint firstItem="aQA-eg-3mZ" firstAttribute="top" secondItem="l77-UK-Gcm" secondAttribute="bottom" id="MFW-EJ-W0l"/>
                             <constraint firstItem="l77-UK-Gcm" firstAttribute="leading" secondItem="zTT-TN-1hM" secondAttribute="leading" constant="8" id="UJI-Em-wue"/>
                             <constraint firstAttribute="bottom" secondItem="BJA-0x-o1U" secondAttribute="bottom" id="Zcn-X7-wGs"/>
                             <constraint firstItem="BJA-0x-o1U" firstAttribute="top" secondItem="zTT-TN-1hM" secondAttribute="top" id="a3f-5Z-Lv1"/>
+                            <constraint firstItem="aQA-eg-3mZ" firstAttribute="leading" secondItem="l77-UK-Gcm" secondAttribute="leading" id="i7o-AU-enk"/>
+                            <constraint firstItem="aQA-eg-3mZ" firstAttribute="trailing" secondItem="l77-UK-Gcm" secondAttribute="trailing" id="io0-js-fap"/>
                             <constraint firstAttribute="trailing" secondItem="l77-UK-Gcm" secondAttribute="trailing" constant="8" id="nVS-ia-lb4"/>
                         </constraints>
                     </view>
@@ -54,8 +75,10 @@
             <viewLayoutGuide key="safeArea" id="vIs-X7-YWa"/>
             <size key="customSize" width="135" height="160"/>
             <connections>
+                <outlet property="dateLabel" destination="aQA-eg-3mZ" id="XxO-sH-DFq"/>
                 <outlet property="mainView" destination="zTT-TN-1hM" id="ati-sE-h1e"/>
                 <outlet property="movieTitleLabel" destination="l77-UK-Gcm" id="k7h-NG-Udg"/>
+                <outlet property="overViewLabel" destination="QPi-X4-sdT" id="S4K-Ur-gFr"/>
                 <outlet property="posterImageView" destination="BJA-0x-o1U" id="Y78-CW-B0x"/>
             </connections>
             <point key="canvasLocation" x="133.59999999999999" y="125.03748125937032"/>

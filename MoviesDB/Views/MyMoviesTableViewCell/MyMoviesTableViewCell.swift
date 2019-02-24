@@ -21,7 +21,7 @@ class MyMoviesTableViewCell: UITableViewCell {
     
     //MARK:- Constants&Variables
     static let nibName: String = "MyMoviesTableViewCellNib"
-    static let estimatedHeight: CGFloat = 160
+    static let estimatedHeight: CGFloat = 180
     var mySavedMovies: [Movie]? {
         didSet {
             DispatchQueue.main.async {
@@ -55,7 +55,7 @@ extension MyMoviesTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: MyMoviesCollectionViewCell.self, for: indexPath)
         let item = mySavedMovies?[indexPath.row]
-        cell.configureCell(imagePath: item?.posterPath ?? "", title: item?.title ?? "")
+        cell.configureCell(imagePath: item?.posterPath ?? "", title: item?.title ?? "", date: item?.releaseDate ?? "", overView: item?.overview ?? "")
         return cell
     }
     

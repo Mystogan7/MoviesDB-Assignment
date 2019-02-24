@@ -28,6 +28,7 @@ class MoviesViewController: UIViewController {
     let fetchMoviesService = FetchMoviesService()
     fileprivate let myMoviesSection = 0
     fileprivate let moviesSection = 1
+    private let cacher = Caching()
     var showMode: MyMoviesViewMode = .noItems
 
     
@@ -62,11 +63,6 @@ class MoviesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
-    @objc func updateMyMovies(notification: Notification) {
-        let savedMovie = notification.userInfo?["movie"] as! Movie
-        self.mySavedMovies.append(savedMovie)
     }
     
 }
@@ -169,6 +165,11 @@ extension MoviesViewController {
                 print(error.description)
             }
         }
+    }
+    
+    @objc func updateMyMovies(notification: Notification) {
+        let savedMovie = notification.userInfo?["movie"] as! Movie
+        self.mySavedMovies.append(savedMovie)
     }
     
     func intiateMySavedMovies() {

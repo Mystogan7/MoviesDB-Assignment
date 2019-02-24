@@ -68,7 +68,9 @@ extension AddNewMoviesViewController {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.delegate = self
-        present(imagePickerController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.present(imagePickerController, animated: true, completion: nil)
+        }
     }
     
     @objc private func handleAddedMovie() {
@@ -115,7 +117,9 @@ extension AddNewMoviesViewController: UIImagePickerControllerDelegate {
         DispatchQueue.main.async {
             self.posterImageView.image = selectedImage
         }
-        dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

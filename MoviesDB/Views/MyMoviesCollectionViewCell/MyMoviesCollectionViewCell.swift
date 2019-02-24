@@ -21,14 +21,18 @@ class MyMoviesCollectionViewCell: UICollectionViewCell {
         }
     }
     @IBOutlet weak var movieTitleLabel: UILabel!
+    @IBOutlet weak var overViewLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
     //MARK:- Constants&Variables
     static let nibName: String = "MyMoviesCollectionViewCellNib"
-    static let estimatedHeight: CGFloat = 140
-    static let estimatedWidth: CGFloat = 100
+    static let estimatedHeight: CGFloat = 160
+    static let estimatedWidth: CGFloat = 120
     
-    func configureCell(imagePath: String, title: String) {
+    func configureCell(imagePath: String, title: String, date: String, overView: String) {
         self.movieTitleLabel.text = title
+        self.dateLabel.text = date
+        self.overViewLabel.text = overView
         DispatchQueue.main.async {
             self.posterImageView.image = imagePath.toImage()
         }
