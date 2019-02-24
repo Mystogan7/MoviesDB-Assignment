@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum MyMoviesDisplayMode {
+fileprivate enum MyMoviesDisplayMode {
     case noItems
     case showItems
 }
@@ -15,6 +15,11 @@ enum MyMoviesDisplayMode {
 enum MoviesListDisplayMode {
     case fetchedMovies
     case displayableMovie
+}
+
+fileprivate enum CellType {
+    case movie
+    case loading
 }
 
 class MoviesViewController: UIViewController {
@@ -26,42 +31,43 @@ class MoviesViewController: UIViewController {
             tableView.register(nib: UINib(nibName: MovieTableViewCell.nibName, bundle: .main), withCellClass: MovieTableViewCell.self)
             tableView.register(nib: UINib(nibName: MyMoviesTableViewCell.nibName, bundle: .main), withCellClass: MyMoviesTableViewCell.self)
             tableView.register(nib: UINib(nibName:MoviesHeaderView.nibName, bundle: .main), withHeaderFooterViewClass: MoviesHeaderView.self)
+            tableView.register(nib: UINib(nibName: LoadingIndicatorTableViewCell.nibName, bundle: .main), withCellClass: LoadingIndicatorTableViewCell.self)
+            fetchMovieslist()
         }
     }
     
     //MARK:- Variables&Constants
-    let fetchMoviesService = FetchMoviesService()
+    private let fetchMoviesService = FetchMoviesService()
     fileprivate let myMoviesSection = 0
     fileprivate let moviesSection = 1
+    fileprivate var currentPage = 1
+    fileprivate var isCurrentlyFetching = false
     private let cacher = Caching()
-    var myMoviesDisplayMode: MyMoviesDisplayMode = .noItems
-    var moviesListDisplayMode: MoviesListDisplayMode = .fetchedMovies
+    fileprivate var myMoviesDisplayMode: MyMoviesDisplayMode = .noItems
+    fileprivate var moviesListDisplayMode: MoviesListDisplayMode = .fetchedMovies
+    fileprivate var cellType: CellType = .movie
 
     
-    var fetchedMovies: [Movie]? {
+    private var fetchedMovies: [Movie]? {
         didSet {
+            guard currentPage == 1 else { return }
             DispatchQueue.main.async {
                 self.tableView.reloadSections([1], with: .automatic)
             }
         }
     }
-    
-    var displayableMovie: Movie? {
+    private var displayableMovie: Movie? {
         didSet {
-            if moviesListDisplayMode == .fetchedMovies {
-                moviesListDisplayMode = .displayableMovie
-            } else {
-                moviesListDisplayMode = .fetchedMovies
-            }
+            switchMoviesListDisplayMode()
             DispatchQueue.main.async {
                 self.tableView.reloadSections([1], with: .automatic)
             }
         }
 
     }
-    var mySavedMovies = [Movie]() {
+    private var myMovies = [Movie]() {
         didSet {
-            if mySavedMovies.isEmpty {
+            if myMovies.isEmpty {
                 myMoviesDisplayMode = .noItems
             } else {
                 myMoviesDisplayMode = .showItems
@@ -75,7 +81,6 @@ class MoviesViewController: UIViewController {
     //MARK:- Controller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchMovieslist()
         bindNotifications()
     }
     
@@ -104,7 +109,11 @@ extension MoviesViewController: UITableViewDataSource {
         case moviesSection:
             switch moviesListDisplayMode {
             case .fetchedMovies:
-                return fetchedMovies?.count ?? 0
+                guard let count = fetchedMovies?.count else {
+                    return 0
+                }
+                //+Indicator Cell
+                return count + 1
             case .displayableMovie:
                 return 1
             }
@@ -121,24 +130,37 @@ extension MoviesViewController: UITableViewDataSource {
                 return UITableViewCell()
             case .showItems:
                 let cell = tableView.dequeueReusableCell(withClass: MyMoviesTableViewCell.self, for: indexPath)
-                cell.mySavedMovies = self.mySavedMovies
+                cell.myMovies = self.myMovies
                 return cell
             }
         case moviesSection:
+            //Handle loading activity.
+            if indexPath.row == fetchedMovies?.count {
+                cellType = .loading
+            } else {
+                cellType = .movie
+            }
+            guard cellType != .loading else {
+                let loader = tableView.dequeueReusableCell(withClass: LoadingIndicatorTableViewCell.self, for: indexPath)
+                return loader
+            }
+            
+            //Handle displaying movies.
             let cell = tableView.dequeueReusableCell(withClass: MovieTableViewCell.self, for: indexPath)
             var item: Movie?
             switch moviesListDisplayMode {
             case .fetchedMovies:
-                 item = fetchedMovies![indexPath.row]
+                item = fetchedMovies?[indexPath.row]
             case .displayableMovie:
                  item = displayableMovie
             }
+            //For proper reuse of cell content.
+            cell.posterImageView.image = nil
             cell.configureCell(imagePath: item?.posterPath ?? "", title: item?.title ?? "", overViewText: item?.overview ?? "", date: item?.releaseDate ?? "", display: moviesListDisplayMode)
             return cell
         default:
             return UITableViewCell()
         }
-        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -180,9 +202,20 @@ extension MoviesViewController: UITableViewDelegate {
         case myMoviesSection:
             return MyMoviesTableViewCell.estimatedHeight
         case moviesSection:
-            return MovieTableViewCell.estimatedHeight
+            switch cellType {
+            case .movie:
+                return MovieTableViewCell.estimatedHeight
+            case .loading:
+                return LoadingIndicatorTableViewCell.estimatedHeight
+            }
         default:
             return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cellType == .loading, !isCurrentlyFetching {
+            fetchMovieslist()
         }
     }
     
@@ -195,11 +228,27 @@ extension MoviesViewController: UITableViewDelegate {
 extension MoviesViewController {
     
     func fetchMovieslist() {
-        fetchMoviesService.start(parameters: ["page": "1"]) { (result) in
+        isCurrentlyFetching = true
+        fetchMoviesService.start(parameters: ["page": "\(currentPage)"]) { (result) in
             switch result {
             case .success(let model):
+                self.isCurrentlyFetching = false
+                guard self.currentPage == 1 else {
+                    (model as? Movies)?.movies?.forEach({ (newMovie) in
+                        self.fetchedMovies?.append(newMovie)
+                    })
+                    DispatchQueue.main.async {
+                        UIView.performWithoutAnimation {
+                            self.tableView.reloadSections([1], with: .none)
+                        }
+                    }
+                    self.currentPage += 1
+                    return
+                }
                 self.fetchedMovies = (model as? Movies)?.movies
+                self.currentPage += 1
             case .failure(let error):
+                self.isCurrentlyFetching = false
                 print(error.description)
             }
         }
@@ -207,7 +256,7 @@ extension MoviesViewController {
     
     @objc func updateMyMovies(notification: Notification) {
         let savedMovie = notification.userInfo?["movie"] as! Movie
-        self.mySavedMovies.append(savedMovie)
+        self.myMovies.append(savedMovie)
     }
     
     @objc func displayMySelectedMovie(notification: Notification) {
@@ -224,6 +273,14 @@ extension MoviesViewController {
         let storyboard = UIStoryboard(name: "Main",  bundle: .main)
         let addNewMoviesViewController = storyboard.instantiateViewController(withIdentifier: "AddNewMoviesViewController") as! AddNewMoviesViewController
         self.navigationController?.pushViewController(addNewMoviesViewController, animated: true)
+    }
+    
+    func switchMoviesListDisplayMode() {
+        if moviesListDisplayMode == .fetchedMovies {
+            moviesListDisplayMode = .displayableMovie
+        } else {
+            moviesListDisplayMode = .fetchedMovies
+        }
     }
 }
 

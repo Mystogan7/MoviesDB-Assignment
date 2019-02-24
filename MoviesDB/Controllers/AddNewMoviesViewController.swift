@@ -112,10 +112,9 @@ extension AddNewMoviesViewController: UIImagePickerControllerDelegate {
         }
         DispatchQueue.main.async {
             self.posterImageView.image = selectedImage
-        }
-        DispatchQueue.main.async {
             self.dismiss(animated: true, completion: nil)
         }
+        
     }
 }
 

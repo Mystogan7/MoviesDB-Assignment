@@ -22,7 +22,7 @@ class MyMoviesTableViewCell: UITableViewCell {
     //MARK:- Constants&Variables
     static let nibName: String = "MyMoviesTableViewCellNib"
     static let estimatedHeight: CGFloat = 180
-    var mySavedMovies: [Movie]? {
+    var myMovies: [Movie]? {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -46,7 +46,7 @@ class MyMoviesTableViewCell: UITableViewCell {
 extension MyMoviesTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let count = mySavedMovies?.count  else {
+        guard let count = myMovies?.count  else {
             return 0
         }
         return count
@@ -54,7 +54,7 @@ extension MyMoviesTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: MyMoviesCollectionViewCell.self, for: indexPath)
-        let item = mySavedMovies?[indexPath.row]
+        let item = myMovies?[indexPath.row]
         cell.configureCell(imagePath: item?.posterPath ?? "", title: item?.title ?? "")
         return cell
     }
@@ -67,6 +67,6 @@ extension MyMoviesTableViewCell: UICollectionViewDelegateFlowLayout, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        NotificationCenter.default.post(name: Notifications.didSelectMyMovie.name, object: nil, userInfo: ["selectedMovie": mySavedMovies?[indexPath.row] as Any])
+        NotificationCenter.default.post(name: Notifications.didSelectMyMovie.name, object: nil, userInfo: ["selectedMovie": myMovies?[indexPath.row] as Any])
     }
 }
