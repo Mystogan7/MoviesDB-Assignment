@@ -29,10 +29,8 @@ class MyMoviesCollectionViewCell: UICollectionViewCell {
     static let estimatedHeight: CGFloat = 160
     static let estimatedWidth: CGFloat = 120
     
-    func configureCell(imagePath: String, title: String, date: String, overView: String) {
+    func configureCell(imagePath: String, title: String) {
         self.movieTitleLabel.text = title
-        self.dateLabel.text = date
-        self.overViewLabel.text = overView
         DispatchQueue.main.async {
             self.posterImageView.image = imagePath.toImage()
         }

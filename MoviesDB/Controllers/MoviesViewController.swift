@@ -7,9 +7,14 @@
 
 import UIKit
 
-enum MyMoviesViewMode {
+enum MyMoviesDisplayMode {
     case noItems
     case showItems
+}
+
+enum MoviesListDisplayMode {
+    case fetchedMovies
+    case displayableMovie
 }
 
 class MoviesViewController: UIViewController {
@@ -29,7 +34,8 @@ class MoviesViewController: UIViewController {
     fileprivate let myMoviesSection = 0
     fileprivate let moviesSection = 1
     private let cacher = Caching()
-    var showMode: MyMoviesViewMode = .noItems
+    var myMoviesDisplayMode: MyMoviesDisplayMode = .noItems
+    var moviesListDisplayMode: MoviesListDisplayMode = .fetchedMovies
 
     
     var fetchedMovies: [Movie]? {
@@ -40,12 +46,25 @@ class MoviesViewController: UIViewController {
         }
     }
     
+    var displayableMovie: Movie? {
+        didSet {
+            if moviesListDisplayMode == .fetchedMovies {
+                moviesListDisplayMode = .displayableMovie
+            } else {
+                moviesListDisplayMode = .fetchedMovies
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadSections([1], with: .automatic)
+            }
+        }
+
+    }
     var mySavedMovies = [Movie]() {
         didSet {
             if mySavedMovies.isEmpty {
-                showMode = .noItems
+                myMoviesDisplayMode = .noItems
             } else {
-                showMode = .showItems
+                myMoviesDisplayMode = .showItems
                 DispatchQueue.main.async {
                     self.tableView.reloadSections([0], with: .automatic)
                 }
@@ -57,7 +76,7 @@ class MoviesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchMovieslist()
-        intiateMySavedMovies()
+        bindNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,14 +95,19 @@ extension MoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case myMoviesSection:
-            switch showMode {
+            switch myMoviesDisplayMode {
             case .noItems:
                 return 0
             case .showItems:
                 return 1
             }
         case moviesSection:
-            return fetchedMovies?.count ?? 0
+            switch moviesListDisplayMode {
+            case .fetchedMovies:
+                return fetchedMovies?.count ?? 0
+            case .displayableMovie:
+                return 1
+            }
         default:
             return 0
         }
@@ -92,7 +116,7 @@ extension MoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case myMoviesSection:
-            switch showMode {
+            switch myMoviesDisplayMode {
             case .noItems:
                 return UITableViewCell()
             case .showItems:
@@ -102,8 +126,14 @@ extension MoviesViewController: UITableViewDataSource {
             }
         case moviesSection:
             let cell = tableView.dequeueReusableCell(withClass: MovieTableViewCell.self, for: indexPath)
-            let item = fetchedMovies![indexPath.row]
-            cell.configureCell(imagePath: item.posterPath!, title: item.title!, overViewText: item.overview!, date: item.releaseDate!)
+            var item: Movie?
+            switch moviesListDisplayMode {
+            case .fetchedMovies:
+                 item = fetchedMovies![indexPath.row]
+            case .displayableMovie:
+                 item = displayableMovie
+            }
+            cell.configureCell(imagePath: item?.posterPath ?? "", title: item?.title ?? "", overViewText: item?.overview ?? "", date: item?.releaseDate ?? "", display: moviesListDisplayMode)
             return cell
         default:
             return UITableViewCell()
@@ -117,16 +147,24 @@ extension MoviesViewController: UITableViewDataSource {
         case myMoviesSection:
             header.route = { self.navigateToAddMoviesViewController() }
             header.showAddMovieSection(true)
-            switch showMode {
+            switch myMoviesDisplayMode {
                case .noItems:
                 header.setLabelText(text: "Add your movies!")
             case .showItems:
                 header.setLabelText(text: "My Movies")
             }
         case moviesSection:
-            header.setLabelText(text: "All Movies")
-            header.route = { }
-            header.showAddMovieSection(false)
+            switch moviesListDisplayMode {
+            case .fetchedMovies:
+                header.setLabelText(text: "All Movies")
+                header.route = { }
+                header.showAddMovieSection(false)
+            case .displayableMovie:
+                header.setLabelText(text: displayableMovie?.title ?? "")
+                header.route = { }
+                header.showAddMovieSection(false)
+            }
+            
         default:
             return nil
         }
@@ -172,8 +210,14 @@ extension MoviesViewController {
         self.mySavedMovies.append(savedMovie)
     }
     
-    func intiateMySavedMovies() {
+    @objc func displayMySelectedMovie(notification: Notification) {
+        let selectedMovie = notification.userInfo?["selectedMovie"] as! Movie
+        self.displayableMovie = selectedMovie
+    }
+    
+    func bindNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateMyMovies), name: Notifications.didSaveMovie.name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(displayMySelectedMovie), name: Notifications.didSelectMyMovie.name, object: nil)
     }
     
     func navigateToAddMoviesViewController() {

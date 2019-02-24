@@ -18,3 +18,9 @@ extension RawRepresentable where RawValue == String, Self: NotificationName {
         }
     }
 }
+
+enum Notifications: String, NotificationName {
+    case didSaveMovie
+    case didSelectMyMovie
+
+}

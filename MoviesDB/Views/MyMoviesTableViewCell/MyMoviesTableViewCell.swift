@@ -55,7 +55,7 @@ extension MyMoviesTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: MyMoviesCollectionViewCell.self, for: indexPath)
         let item = mySavedMovies?[indexPath.row]
-        cell.configureCell(imagePath: item?.posterPath ?? "", title: item?.title ?? "", date: item?.releaseDate ?? "", overView: item?.overview ?? "")
+        cell.configureCell(imagePath: item?.posterPath ?? "", title: item?.title ?? "")
         return cell
     }
     
@@ -64,5 +64,9 @@ extension MyMoviesTableViewCell: UICollectionViewDataSource {
 extension MyMoviesTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: MyMoviesCollectionViewCell.estimatedWidth, height: MyMoviesCollectionViewCell.estimatedHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        NotificationCenter.default.post(name: Notifications.didSelectMyMovie.name, object: nil, userInfo: ["selectedMovie": mySavedMovies?[indexPath.row] as Any])
     }
 }

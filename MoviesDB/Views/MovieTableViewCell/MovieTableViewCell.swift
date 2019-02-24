@@ -29,15 +29,19 @@ class MovieTableViewCell: UITableViewCell {
     static let estimatedHeight: CGFloat = 600
     static let nibName: String = "MovieTableViewCellNib"
     
-    func configureCell(imagePath: String, title: String, overViewText: String, date: String) {
+    func configureCell(imagePath: String, title: String, overViewText: String, date: String, display: MoviesListDisplayMode) {
         titleLabel.text = title
         overViewLabel.text = overViewText
         dateLabel.text = date
+        if display == .fetchedMovies {
         guard let imagePath = URL(string: "\(Urls.Path.poster.absolutePath)\(imagePath)") else {
             posterImageView.image = UIImage.init(named: "poster-placeholder")
             return
         }
         posterImageView.fetchImage(imagePath)
+        } else {
+            posterImageView.image = imagePath.toImage()
+        }
     }
    
 

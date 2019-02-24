@@ -7,10 +7,6 @@
 
 import UIKit
 
-enum Notifications: String, NotificationName {
-    case didSaveMovie
-}
-
 class AddNewMoviesViewController: UIViewController {
     
     //MARK:- Outlets
