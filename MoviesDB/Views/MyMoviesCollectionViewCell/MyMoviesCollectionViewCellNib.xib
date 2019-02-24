@@ -25,10 +25,6 @@
                             <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="1000" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BJA-0x-o1U" userLabel="posterImageView">
                                 <rect key="frame" x="0.0" y="0.0" width="125" height="150"/>
                             </imageView>
-                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JhP-qW-92w" userLabel="backgroundImage">
-                                <rect key="frame" x="0.0" y="0.0" width="125" height="150"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avengers" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l77-UK-Gcm">
                                 <rect key="frame" x="8" y="8" width="109" height="19.5"/>
                                 <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="14"/>
@@ -41,14 +37,10 @@
                             <constraint firstItem="BJA-0x-o1U" firstAttribute="leading" secondItem="zTT-TN-1hM" secondAttribute="leading" id="0No-xd-1Mi"/>
                             <constraint firstAttribute="trailing" secondItem="BJA-0x-o1U" secondAttribute="trailing" id="7Yh-st-2Z7"/>
                             <constraint firstItem="l77-UK-Gcm" firstAttribute="top" secondItem="zTT-TN-1hM" secondAttribute="top" constant="8" id="E7U-Yk-NaN"/>
-                            <constraint firstItem="JhP-qW-92w" firstAttribute="top" secondItem="BJA-0x-o1U" secondAttribute="top" id="Iof-Xl-5la"/>
-                            <constraint firstItem="JhP-qW-92w" firstAttribute="bottom" secondItem="BJA-0x-o1U" secondAttribute="bottom" id="K6n-4z-lGX"/>
                             <constraint firstItem="l77-UK-Gcm" firstAttribute="leading" secondItem="zTT-TN-1hM" secondAttribute="leading" constant="8" id="UJI-Em-wue"/>
                             <constraint firstAttribute="bottom" secondItem="BJA-0x-o1U" secondAttribute="bottom" id="Zcn-X7-wGs"/>
                             <constraint firstItem="BJA-0x-o1U" firstAttribute="top" secondItem="zTT-TN-1hM" secondAttribute="top" id="a3f-5Z-Lv1"/>
-                            <constraint firstItem="JhP-qW-92w" firstAttribute="leading" secondItem="BJA-0x-o1U" secondAttribute="leading" id="haa-td-Wd8"/>
                             <constraint firstAttribute="trailing" secondItem="l77-UK-Gcm" secondAttribute="trailing" constant="8" id="nVS-ia-lb4"/>
-                            <constraint firstItem="JhP-qW-92w" firstAttribute="trailing" secondItem="BJA-0x-o1U" secondAttribute="trailing" id="qns-yO-VkT"/>
                         </constraints>
                     </view>
                 </subviews>

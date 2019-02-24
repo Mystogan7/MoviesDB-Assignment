@@ -33,7 +33,11 @@ class MovieTableViewCell: UITableViewCell {
         titleLabel.text = title
         overViewLabel.text = overViewText
         dateLabel.text = date
-        posterImageView.fetchImage(URL(string: "\(Urls.Path.poster.absolutePath)\(imagePath)")!)
+        guard let imagePath = URL(string: "\(Urls.Path.poster.absolutePath)\(imagePath)") else {
+            posterImageView.image = UIImage.init(named: "poster-placeholder")
+            return
+        }
+        posterImageView.fetchImage(imagePath)
     }
    
 

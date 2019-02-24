@@ -31,18 +31,23 @@ class MoviesViewController: UIViewController {
     var showMode: MyMoviesViewMode = .noItems
 
     
-    var movies: [Movie]? {
+    var fetchedMovies: [Movie]? {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.tableView.reloadSections([1], with: .automatic)
             }
         }
     }
     
-    var myMovies: [Movie]? {
+    var mySavedMovies = [Movie]() {
         didSet {
-            if let myMovies = myMovies, myMovies.isEmpty { showMode = .noItems } else {
+            if mySavedMovies.isEmpty {
+                showMode = .noItems
+            } else {
                 showMode = .showItems
+                DispatchQueue.main.async {
+                    self.tableView.reloadSections([0], with: .automatic)
+                }
             }
         }
     }
@@ -51,16 +56,19 @@ class MoviesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchMovieslist()
+        intiateMySavedMovies()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        loadMyMoviesFromCacher()
     }
     
+    @objc func updateMyMovies(notification: Notification) {
+        let savedMovie = notification.userInfo?["movie"] as! Movie
+        self.mySavedMovies.append(savedMovie)
+    }
     
-
 }
 
 extension MoviesViewController: UITableViewDataSource {
@@ -79,7 +87,7 @@ extension MoviesViewController: UITableViewDataSource {
                 return 1
             }
         case moviesSection:
-            return movies?.count ?? 0
+            return fetchedMovies?.count ?? 0
         default:
             return 0
         }
@@ -93,11 +101,12 @@ extension MoviesViewController: UITableViewDataSource {
                 return UITableViewCell()
             case .showItems:
                 let cell = tableView.dequeueReusableCell(withClass: MyMoviesTableViewCell.self, for: indexPath)
+                cell.mySavedMovies = self.mySavedMovies
                 return cell
             }
         case moviesSection:
             let cell = tableView.dequeueReusableCell(withClass: MovieTableViewCell.self, for: indexPath)
-            let item = movies![indexPath.row]
+            let item = fetchedMovies![indexPath.row]
             cell.configureCell(imagePath: item.posterPath!, title: item.title!, overViewText: item.overview!, date: item.releaseDate!)
             return cell
         default:
@@ -150,28 +159,20 @@ extension MoviesViewController: UITableViewDelegate {
 }
 
 extension MoviesViewController {
+    
     func fetchMovieslist() {
         fetchMoviesService.start(parameters: ["page": "1"]) { (result) in
             switch result {
             case .success(let model):
-                self.movies = (model as? Movies)?.movies
+                self.fetchedMovies = (model as? Movies)?.movies
             case .failure(let error):
                 print(error.description)
             }
         }
     }
     
-    func loadMyMoviesFromCacher() {
-        let cacher = Caching()
-        cacher.pathComponent = "My movies"
-        cacher.load(key: cacher.pathComponent) { (data) in
-            guard let data = data else { return }
-            do {
-                let _ = try JSONDecoder().decode(Movie.self, from: data) as? Movie
-            } catch {
-                
-            }
-        }
+    func intiateMySavedMovies() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateMyMovies), name: Notifications.didSaveMovie.name, object: nil)
     }
     
     func navigateToAddMoviesViewController() {

@@ -7,9 +7,9 @@
 
 import Foundation
 
-class BaseModel: Codable {
+class BaseModel: NSObject, Codable {
     
-    init() {}
+    override init() { super.init() }
 
     required init(from decoder: Decoder) throws { }
     

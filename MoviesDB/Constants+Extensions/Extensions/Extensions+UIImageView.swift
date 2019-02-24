@@ -16,4 +16,9 @@ extension UIImageView {
             }
         }
     }
+    
+    func toString() -> String? {
+        let data: Data? = (self.image ?? UIImage()).pngData()
+        return data?.base64EncodedString(options: .endLineWithLineFeed)
+    }
 }

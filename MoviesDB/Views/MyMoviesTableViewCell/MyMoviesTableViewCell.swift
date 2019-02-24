@@ -21,8 +21,14 @@ class MyMoviesTableViewCell: UITableViewCell {
     
     //MARK:- Constants&Variables
     static let nibName: String = "MyMoviesTableViewCellNib"
-    static let estimatedHeight: CGFloat = 120
-    fileprivate let defaultCell = 0
+    static let estimatedHeight: CGFloat = 160
+    var mySavedMovies: [Movie]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,21 +46,23 @@ class MyMoviesTableViewCell: UITableViewCell {
 extension MyMoviesTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        guard let count = mySavedMovies?.count  else {
+            return 0
+        }
+        return count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: MyMoviesCollectionViewCell.self, for: indexPath)
-        guard indexPath.row != defaultCell else {
-            cell.movieTitleLabel.text = ""
-            cell.posterImageView.image = nil
-            return cell
-        }
+        let item = mySavedMovies?[indexPath.row]
+        cell.configureCell(imagePath: item?.posterPath ?? "", title: item?.title ?? "")
         return cell
     }
     
 }
 
-extension MyMoviesTableViewCell: UICollectionViewDelegate {
-    
+extension MyMoviesTableViewCell: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: MyMoviesCollectionViewCell.estimatedWidth, height: MyMoviesCollectionViewCell.estimatedHeight)
+    }
 }

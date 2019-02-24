@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum Notifications: String, NotificationName {
+    case didSaveMovie
+}
+
 class AddNewMoviesViewController: UIViewController {
     
     //MARK:- Outlets
@@ -40,7 +44,7 @@ class AddNewMoviesViewController: UIViewController {
 extension AddNewMoviesViewController {
     
     private func intiateSaveButton() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveInCache))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(handleAddedMovie))
         self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
     private func updateSaveButtonState() {
@@ -67,17 +71,15 @@ extension AddNewMoviesViewController {
         present(imagePickerController, animated: true, completion: nil)
     }
     
-    @objc private func saveInCache() {
-        let selectedImageString = posterImageView.image?.pngData()?.base64EncodedString()
+    @objc private func handleAddedMovie() {
+        let selectedImageString = posterImageView.toString()
         let dictionary = ["id": Int.random(in: 0...999), "title": titleTextField.text ?? "", "poster_path": selectedImageString as Any, "release_date": dateTextField.text ?? "", "overview": overViewTextField.text ?? ""] as [String : Any]
-        let cacher = Caching()
         do {
             let data = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
-            cacher.pathComponent = "My movies"
-            cacher.save(data: data, key: cacher.pathComponent) {
-                DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
-                }
+            let movie = try JSONDecoder().decode(Movie.self, from: data)
+            NotificationCenter.default.post(name: Notifications.didSaveMovie.name, object: nil, userInfo: ["movie": movie])
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
             }
         } catch let error {
             fatalError("\(error)")
@@ -118,4 +120,5 @@ extension AddNewMoviesViewController: UIImagePickerControllerDelegate {
 }
 
 extension AddNewMoviesViewController: UINavigationControllerDelegate { }
+
 
