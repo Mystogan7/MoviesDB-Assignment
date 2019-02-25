@@ -24,6 +24,9 @@
                         <subviews>
                             <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="1000" misplaced="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BJA-0x-o1U" userLabel="posterImageView">
                                 <rect key="frame" x="0.0" y="0.0" width="125" height="160"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avengers" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="l77-UK-Gcm">
                                 <rect key="frame" x="8" y="8" width="109" height="14"/>
@@ -33,6 +36,9 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstItem="BJA-0x-o1U" firstAttribute="leading" secondItem="zTT-TN-1hM" secondAttribute="leading" id="0No-xd-1Mi"/>
                             <constraint firstAttribute="trailing" secondItem="BJA-0x-o1U" secondAttribute="trailing" id="7Yh-st-2Z7"/>

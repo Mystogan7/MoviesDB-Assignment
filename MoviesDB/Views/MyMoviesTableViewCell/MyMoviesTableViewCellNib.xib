@@ -36,6 +36,9 @@
                                     </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstItem="lJa-rX-d1j" firstAttribute="top" secondItem="l8C-4w-oPR" secondAttribute="top" constant="4" id="8x7-ya-GQN"/>
                                     <constraint firstAttribute="bottom" secondItem="lJa-rX-d1j" secondAttribute="bottom" constant="4" id="HpY-Cq-CMn"/>
@@ -45,6 +48,9 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="l8C-4w-oPR" secondAttribute="trailing" id="3iN-wr-hNd"/>
                             <constraint firstItem="l8C-4w-oPR" firstAttribute="top" secondItem="QDI-Mw-7PB" secondAttribute="top" id="LLr-N0-mS5"/>

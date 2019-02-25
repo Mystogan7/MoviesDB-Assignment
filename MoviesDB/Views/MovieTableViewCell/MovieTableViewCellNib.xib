@@ -29,10 +29,16 @@
                                         <subviews>
                                             <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="1000" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ck6-BP-njH" userLabel="posterImageView">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="579.5"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <bool key="isElement" value="YES"/>
+                                                </accessibility>
                                             </imageView>
                                             <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I2l-Nm-odk" userLabel="backgroundImage">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="579.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <bool key="isElement" value="YES"/>
+                                                </accessibility>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1w-ad-loe">
                                                 <rect key="frame" x="8" y="290" width="339" height="289.5"/>
@@ -63,6 +69,9 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <bool key="isElement" value="YES"/>
+                                                </accessibility>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="JhC-eT-3Nc" secondAttribute="trailing" constant="8" id="Dqc-dU-D7q"/>
                                                     <constraint firstItem="JhC-eT-3Nc" firstAttribute="leading" secondItem="c1w-ad-loe" secondAttribute="leading" constant="8" id="U3z-2c-ump"/>
@@ -77,6 +86,9 @@
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="c1w-ad-loe" secondAttribute="trailing" constant="8" id="1cU-58-xYD"/>
                                             <constraint firstItem="I2l-Nm-odk" firstAttribute="trailing" secondItem="Ck6-BP-njH" secondAttribute="trailing" id="4fG-9e-unK"/>
@@ -94,6 +106,9 @@
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstItem="0EV-Ee-yTj" firstAttribute="height" secondItem="14M-ib-1aP" secondAttribute="height" id="LAM-4d-3sB"/>
                                     <constraint firstItem="0EV-Ee-yTj" firstAttribute="leading" secondItem="14M-ib-1aP" secondAttribute="leading" id="opo-ls-31P"/>
@@ -103,6 +118,9 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstItem="14M-ib-1aP" firstAttribute="top" secondItem="MVR-6o-WPR" secondAttribute="top" constant="10" id="EB4-X6-BWG"/>
                             <constraint firstAttribute="trailing" secondItem="14M-ib-1aP" secondAttribute="trailing" constant="10" id="LII-Kz-11I"/>
@@ -118,6 +136,9 @@
                     <constraint firstItem="MVR-6o-WPR" firstAttribute="top" secondItem="24c-3U-eyd" secondAttribute="top" id="r3R-bn-Ajr"/>
                 </constraints>
             </tableViewCellContentView>
+            <accessibility key="accessibilityConfiguration">
+                <bool key="isElement" value="YES"/>
+            </accessibility>
             <connections>
                 <outlet property="contentTextView" destination="c1w-ad-loe" id="VnZ-03-WZ6"/>
                 <outlet property="dateLabel" destination="lj7-BF-4fi" id="xRu-h4-wdg"/>

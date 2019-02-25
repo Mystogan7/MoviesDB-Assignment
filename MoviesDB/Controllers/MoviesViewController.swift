@@ -37,7 +37,7 @@ class MoviesViewController: UIViewController {
     }
     
     //MARK:- Variables&Constants
-    private let fetchMoviesService = FetchMoviesService()
+    var fetchMoviesService = FetchMoviesService()
     fileprivate let myMoviesSection = 0
     fileprivate let moviesSection = 1
     fileprivate var currentPage = 1
@@ -47,6 +47,8 @@ class MoviesViewController: UIViewController {
     fileprivate var moviesListDisplayMode: MoviesListDisplayMode = .fetchedMovies
     fileprivate var cellType: CellType = .movie
 
+    //For Testing purpose
+    var notificationCenterInstance = NotificationCenter.default
     
     private var fetchedMovies: [Movie]? {
         didSet {
@@ -167,6 +169,10 @@ extension MoviesViewController: UITableViewDataSource {
         let header =  tableView.dequeueReusableHeaderFooterView(withClass: MoviesHeaderView.self)
         switch section {
         case myMoviesSection:
+            //For UI-Testing
+            header.accessibilityIdentifier = "header_0"
+            header.isAccessibilityElement = true
+            
             header.route = { self.navigateToAddMoviesViewController() }
             header.showAddMovieSection(true)
             switch myMoviesDisplayMode {
@@ -176,6 +182,9 @@ extension MoviesViewController: UITableViewDataSource {
                 header.setLabelText(text: "My Movies")
             }
         case moviesSection:
+            //For UI-Testing
+            header.accessibilityIdentifier = ""
+            header.isAccessibilityElement = true
             switch moviesListDisplayMode {
             case .fetchedMovies:
                 header.setLabelText(text: "All Movies")
