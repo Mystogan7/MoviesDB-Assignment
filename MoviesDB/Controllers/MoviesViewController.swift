@@ -47,8 +47,6 @@ class MoviesViewController: UIViewController {
     fileprivate var moviesListDisplayMode: MoviesListDisplayMode = .fetchedMovies
     fileprivate var cellType: CellType = .movie
 
-    //For Testing purpose
-    var notificationCenterInstance = NotificationCenter.default
     
     private var fetchedMovies: [Movie]? {
         didSet {

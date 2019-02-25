@@ -6,27 +6,43 @@
 //
 
 import XCTest
+@testable import MoviesDB
 
-class CachingTests: XCTestCase {
-
+class CacheServiceTests: XCTestCase {
+   
+    let service = Caching()
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
+        try? service.clear()
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testClear() {
+        let expectation = self.expectation(description: #function)
+        let string = "Hello world"
+        let data = string.data(using: .utf8)!
+        
+        service.save(data: data, key: "key", completion: {
+            try? self.service.clear()
+            self.service.load(key: "key", completion: {
+                XCTAssertNil($0)
+                expectation.fulfill()
+            })
+        })
+        wait(for: [expectation], timeout: 1)
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testSave() {
+        let expectation = self.expectation(description: #function)
+        let string = "Hello world"
+        let data = string.data(using: .utf8)!
+        
+        service.save(data: data, key: "key")
+        service.load(key: "key", completion: {
+            XCTAssertEqual($0, data)
+            expectation.fulfill()
+        })
+        
+        wait(for: [expectation], timeout: 1)
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
