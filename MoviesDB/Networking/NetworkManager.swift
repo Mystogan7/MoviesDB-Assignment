@@ -43,7 +43,9 @@ class NetworkManager {
                         let model = try JSONDecoder().decode(request.responseModel.self, from: responseData)
                         requestResult = Result.success(model)
                         request.completion(requestResult)
-                    } catch { }
+                    } catch let error {
+                        fatalError("\(error)")
+                    }
                     
                 case .failure:
                     requestResult = Result.failure(BaseError(error: "", errorCode: "", description: ""))
