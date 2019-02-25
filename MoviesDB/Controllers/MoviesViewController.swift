@@ -58,7 +58,12 @@ class MoviesViewController: UIViewController {
     }
     private var displayableMovie: Movie? {
         didSet {
-            switchMoviesListDisplayMode()
+            if moviesListDisplayMode == .fetchedMovies {
+                moviesListDisplayMode = .displayableMovie
+            } else if
+                moviesListDisplayMode == .displayableMovie && displayableMovie == oldValue {
+                moviesListDisplayMode = .fetchedMovies
+            }
             DispatchQueue.main.async {
                 self.tableView.reloadSections([1], with: .automatic)
             }
@@ -282,12 +287,5 @@ extension MoviesViewController {
         self.navigationController?.pushViewController(addNewMoviesViewController, animated: true)
     }
     
-    func switchMoviesListDisplayMode() {
-        if moviesListDisplayMode == .fetchedMovies {
-            moviesListDisplayMode = .displayableMovie
-        } else {
-            moviesListDisplayMode = .fetchedMovies
-        }
-    }
 }
 
